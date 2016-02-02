@@ -37,8 +37,10 @@
 
 <template name="post">
   <div class="example-wrapper clearfix">
+    {{#unless editingPost}}
     <h3>
       {{#if currentUser}}
+        <span class="edit">&#x270D;</span>
         <span class="delete">&times;</span>
         &nbsp;&nbsp;
       {{/if}}
@@ -50,5 +52,21 @@
     <div class="post-details">
       <span>{{username}} - {{formatDate creationDate}}</span>
     </div>
+    {{else}}
+    <form class="edit-post">
+      <h3>
+        <input name="title" class="line" type="text" value="{{ title }}" />
+      </h3>
+      <div class="demo-wrapper">
+        <p><input name="description" class="line" type="text" value="{{ description }}" /></p>
+      </div>
+      
+      <div class="post-update-actions">
+        <button class="edit-post-cancel">Cancel</button>
+        <input type="submit" value="Update Post" />
+      </div>
+
+    </form>
+    {{/unless}}
   </div>
 </template>

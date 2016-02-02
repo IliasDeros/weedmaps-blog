@@ -702,3 +702,16 @@ form.main > input {
 .post-details {
     text-align: right;
 }
+
+.edit-post h3 > input {
+ color: white;   
+}
+
+.edit-post input {
+    width: 100%;
+}
+
+.post-update-actions {
+    display: flex;
+    height: 24px;
+}
