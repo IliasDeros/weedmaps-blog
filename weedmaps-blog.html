@@ -4,11 +4,13 @@
 
 <body>
   <div class="container">
+    {{> loginButtons}}
+  
     <header>
-      <h1>WeedMaps Blog</h1>
+      <h1>WeedMaps Blog{{#if currentUser}} - {{currentUser.username}}'s posts{{/if}}</h1>
       <h2>By Ilias Deros</h2>
     </header>
-    
+  
     {{#if writingPost}}
       <form class="main new-post">
         <label for="title">Title</label>
@@ -28,14 +30,18 @@
     </section>
   </div>
   
-  <button id="new-post" class="floating-action {{#if writingPost}}on{{/if}}">+</button>
+  {{#if currentUser}}
+    <button id="new-post" class="floating-action {{#if writingPost}}on{{/if}}">+</button>
+  {{/if}}
 </body>
 
 <template name="post">
   <div class="example-wrapper clearfix">
     <h3>
-      <span class="delete">&times;</span>
-      &nbsp;&nbsp;
+      {{#if currentUser}}
+        <span class="delete">&times;</span>
+        &nbsp;&nbsp;
+      {{/if}}
       {{ title }}
     </h3>
     <div class="demo-wrapper">

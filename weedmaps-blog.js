@@ -1,6 +1,12 @@
 var Posts = new Mongo.Collection('posts');
 var writingPost = false;
 
+if (Meteor.isServer) {
+  Meteor.startup(function () {
+    // code to run on server at startup
+  });
+}
+
 if (Meteor.isClient) {
   Template.body.helpers({
     posts: getPosts,
@@ -11,14 +17,14 @@ if (Meteor.isClient) {
     'click #new-post': toggleNewPost,
     'submit .new-post': submitPost,
     'click .delete': deletePost
-  })
-}
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
+  });
+  
+  Accounts.ui.config({
+    passwordSignupFields: "USERNAME_ONLY"
   });
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 // toggle new post creation mode
 function toggleNewPost(){
@@ -39,7 +45,9 @@ function submitPost(e){
   Posts.insert({
     title: title,
     description: description,
-    creationDate: new Date()
+    creationDate: new Date(),
+    owner: Meteor.userId(),
+    username: Meteor.user().username
   });
   
   // clear posts writing form
@@ -53,5 +61,14 @@ function deletePost(e){
 
 // get a list of all posts
 function getPosts(){
-  return Posts.find({}, {sort: {creationDate: -1}});
+  var posts = [];
+  var currentUserId = Meteor.userId();
+  
+  if (currentUserId){
+    posts = Posts.find({owner: currentUserId}, {sort: {creationDate: -1}});
+  } else {
+    posts = Posts.find({}, {sort: {creationDate: -1}});
+  }
+  
+  return posts;
 }
