@@ -1,5 +1,6 @@
 var Posts = new Mongo.Collection('posts');
 var writingPost = false;
+var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
@@ -17,6 +18,10 @@ if (Meteor.isClient) {
     'click #new-post': toggleNewPost,
     'submit .new-post': submitPost,
     'click .delete': deletePost
+  });
+  
+  Template.registerHelper('formatDate', function(date){
+    return monthNames[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
   });
   
   Accounts.ui.config({

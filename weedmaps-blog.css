@@ -698,3 +698,7 @@ form.main > input {
     color: blue;
     cursor: pointer;
 }
+
+.post-details {
+    text-align: right;
+}
