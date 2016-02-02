@@ -3,12 +3,23 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
+  <div class="container">
+    <header>
+      <h1>WeedMaps Blog</h1>
+      <h2>By Ilias Deros</h2>
+    </header>
+    
+    <section class="main">
+      {{> post}}
+    </section>
+  </div>
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="post">
+  <div class="example-wrapper clearfix">
+    <h3>A blog post</h3>
+    <div class="demo-wrapper">
+      <p>A post's content.</p>
+    </div>
+  </div>
 </template>
