@@ -33,11 +33,11 @@ if (Meteor.isClient) {
   
   Template.registerHelper('formatDate', function(date){
     return monthNames[date.getMonth()] 
-      + " " + date.getDate() + ", " + date.getFullYear();
+      + ' ' + date.getDate() + ', ' + date.getFullYear() + ' - ';
   });
   
   Accounts.ui.config({
-    passwordSignupFields: "USERNAME_ONLY"
+    passwordSignupFields: 'USERNAME_ONLY'
   });
 }
 
