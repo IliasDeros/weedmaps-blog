@@ -9,17 +9,37 @@
       <h2>By Ilias Deros</h2>
     </header>
     
+    {{#if writingPost}}
+      <form class="main new-post">
+        <label for="title">Title</label>
+        <input name="title" type="text" class="line" />
+        
+        <label for="description">Description</label>
+        <input name="description" type="text" class="line" />
+        
+        <input type="submit" value="Post" />
+      </form>
+    {{/if}}
+    
     <section class="main">
-      {{> post}}
+      {{#each posts}}
+        {{> post}}
+      {{/each}}
     </section>
   </div>
+  
+  <button id="new-post" class="floating-action {{#if writingPost}}on{{/if}}">+</button>
 </body>
 
 <template name="post">
   <div class="example-wrapper clearfix">
-    <h3>A blog post</h3>
+    <h3>
+      <span class="delete">&times;</span>
+      &nbsp;&nbsp;
+      {{ title }}
+    </h3>
     <div class="demo-wrapper">
-      <p>A post's content.</p>
+      <p>{{ description }}</p>
     </div>
   </div>
 </template>
